@@ -1,0 +1,18 @@
+#toolbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    gap: 15px;
+}
+
+#toolbar input, #toolbar button {
+    padding: 5px;
+    font-size: 16px;
+}
+
+canvas {
+    border: 1px solid #000;
+    background-color: #fff;
+    cursor: crosshair;
+}
