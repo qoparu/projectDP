@@ -86,3 +86,21 @@ document.addEventListener('keydown', (e) => {
         undo();
     }
 });
+
+const socket = new WebSocket('ws://localhost:8080/ws');
+
+// Send drawing data to the server
+function sendDrawingData(x, y, color, lineWidth, isEraser) {
+    const message = { x, y, color, lineWidth, isEraser };
+    socket.send(JSON.stringify(message));
+}
+
+// Receive drawing data from the server
+socket.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    ctx.strokeStyle = data.isEraser ? '#FFFFFF' : data.color;
+    ctx.lineWidth = data.lineWidth;
+    ctx.beginPath();
+    ctx.moveTo(data.x, data.y); // Assume the server sends line start coordinates
+    ctx.stroke();
+};
